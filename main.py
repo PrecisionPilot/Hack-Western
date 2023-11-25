@@ -4,6 +4,7 @@ import pyautogui
 
 cam = cv2.VideoCapture(0)
 face_mesh = mp.solutions.face_mesh.FaceMesh(refine_landmarks=True)
+screen_w, screen_h = pyautogui.size()
 
 #activating the camera
 while True:
@@ -19,7 +20,7 @@ while True:
     if landmark_points:
         landmarks = landmark_points[0].landmark
         #detecting only the iris
-        for landmark in landmarks[474:478]:
+        for id, landmark in enumerate(landmarks[474:478]):
 
             #getting coordinates
             x = int(landmark.x * frame_w)
@@ -28,8 +29,8 @@ while True:
             print(x, y)
 
             #setting up the mouse
-            # if id == 1:
-            #     pyautogui.move(x, y)
+            if id == 1:
+                pyautogui.moveTo(x, y)
 
 
     cv2.imshow('Eye Controlled Mouse', frame)
