@@ -49,35 +49,40 @@ while True:
 
         #print(angle_head)
 
+    #moving up
     if angle_head < 0 and not top_temp:
         print("top")
-        y_factor = int(angle_head * frame_h)
+        y_factor = int(angle_head * frame_h * 10)
         pyautogui.scroll(y_factor)
         top_temp = True
     if angle_head > 0:
         top_temp = False
 
+    #moving down
     if angle_head > 0 and not bottom_temp:
         print("bottom")
-        y_factor = int(angle_head * frame_h *-1)
+        y_factor = int(angle_head * frame_h * -10)
         pyautogui.scroll(y_factor)
         bottom_temp = True
     if angle_head < 0:
         bottom_temp = False
 
-        # if angle_head < -0.15 and not right_tmp:
-        #     pyautogui.press("nexttrack")
-        #     print("right")
-        #     right_tmp = True
-        # if angle_head > -0.15:
-        #     right_tmp = False
+    #moving right
+    if angle_head < -0.15 and not right_tmp:
+        print("right")
+        x_factor = int(angle_head * frame_w  * -10)
+        pyautogui.hscroll(x_factor * 10)
+        right_tmp = True
+    if angle_head > -0.15:
+        right_tmp = False
 
-        # if angle_head > 0.15 and not left_tmp:
-        #     pyautogui.press("prevtrack")
-        #     print("left")
-        #     left_tmp = True
-        # if angle_head < 0.15:
-        #     left_tmp = False
+    #moving left
+    if angle_head > 0.15 and not left_tmp:
+        print("left")
+        pyautogui.hscroll(x_factor * -10)
+        left_tmp = True
+    if angle_head < 0.15:
+        left_tmp = False
 
         # #clicking functionality
         # left = [landmarks[145], landmarks[159]]
