@@ -1,10 +1,15 @@
 import cv2
 import mediapipe as mp
 import pyautogui
+import math
 
 cam = cv2.VideoCapture(0)
 face_mesh = mp.solutions.face_mesh.FaceMesh(refine_landmarks=True)
 screen_w, screen_h = pyautogui.size()
+
+# Temporary variables
+left_tmp = False
+right_tmp = False
 
 #activating the camera
 while True:
@@ -20,17 +25,35 @@ while True:
     if landmark_points:
         landmarks = landmark_points[0].landmark
         #detecting only the iris
-        for id, landmark in enumerate(landmarks[474:478]):
+        for id, landmark in enumerate(landmarks):
 
             #getting coordinates
             x = int(landmark.x * frame_w)
             y = int(landmark.y * frame_h)
             cv2.circle(frame, (x, y), 3, (0, 255, 0))
-            print(x, y)
+            # print(x, y)
 
             #setting up the mouse
             if id == 1:
                 pyautogui.moveTo(x, y)
+        
+        # Calculate head angle
+        delta_x = landmarks[10].x - landmarks[152].x
+        delta_y = landmarks[10].y - landmarks[152].y
+        angle_head = math.atan(delta_x/delta_y)
+
+        if angle_head < -0.15 and not right_tmp:
+            print("right")
+            right_tmp = True
+        if angle_head > -0.15:
+            right_tmp = False
+
+        if angle_head > 0.15 and not left_tmp:
+            print("left")
+            left_tmp = True
+        if angle_head < 0.15:
+            left_tmp = False
+
 
 
     cv2.imshow('Eye Controlled Mouse', frame)
