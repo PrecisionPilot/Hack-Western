@@ -1,13 +1,23 @@
-import React from 'react'
+import React from 'react';
 
-import { Article, Brand, CTA } from './components';
+import { Footer, Blog, Possibility, Features, What, Header } from './containers';
+import { CTA, Brand, Navbar } from './components';
 
-const App = () => {
-  return (
-    <div>
-        <h1>hi</h1>
+
+const App = () => (
+  <div className="App">
+    <div className="gradient__bg">
+      <Navbar />
+      <Header />
     </div>
-  )
-}
+    <Brand />
+    <What />
+    <Features />
+    <Possibility />
+    <CTA />
+    <Blog />
+    <Footer />
+  </div>
+);
 
-export default App
+export default App;
