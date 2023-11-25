@@ -31,16 +31,14 @@ while True:
             x = int(landmark.x * frame_w)
             y = int(landmark.y * frame_h)
             cv2.circle(frame, (x, y), 3, (0, 255, 0))
-            # print(x, y)
+            #print(x, y)
 
             #setting up the mouse
             if id == 1:
-                pyautogui.moveTo(x, y)
-        
-        # Calculate head angle
-        delta_x = landmarks[10].x - landmarks[152].x
-        delta_y = landmarks[10].y - landmarks[152].y
-        angle_head = math.atan(delta_x/delta_y)
+                screen_x = screen_w / screen_w * x
+                screen_y = screen_h / screen_h * y
+                #pyautogui.moveTo(x, y)
+                pyautogui.moveTo(screen_x, screen_y)
 
         if angle_head < -0.15 and not right_tmp:
             pyautogui.press("nexttrack")
@@ -56,6 +54,16 @@ while True:
         if angle_head < 0.15:
             left_tmp = False
 
+        #clicking functionality
+        left = [landmarks[145], landmarks[159]]
+        for landmark in left:
+            #getting coordinates
+            x = int(landmark.x * frame_w)
+            y = int(landmark.y * frame_h)
+            cv2.circle(frame, (x, y), 3, (0, 255, 255))
+
+        if(left[0].y - left[1].y) < 0.004:
+            print('click')
 
 
     cv2.imshow('Eye Controlled Mouse', frame)
