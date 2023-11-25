@@ -31,7 +31,7 @@ print("Analysing speech...")
 from google.cloud import speech
 
 
-client = speech.SpeechClient.from_service_account_file("computer-vision/auth.json")
+client = speech.SpeechClient.from_service_account_file("auth.json")
 file_name = "speech.wav"
 with open(file_name, "rb") as f:
     mp3_data = f.read()
