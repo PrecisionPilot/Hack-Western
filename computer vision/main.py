@@ -10,6 +10,8 @@ screen_w, screen_h = pyautogui.size()
 # Temporary variables
 left_tmp = False
 right_tmp = False
+top_temp = False
+bottom_temp = False
 
 #activating the camera
 while True:
@@ -45,30 +47,48 @@ while True:
         delta_y = landmarks[10].y - landmarks[152].y
         angle_head = math.atan(delta_x/delta_y)
 
-        if angle_head < -0.15 and not right_tmp:
-            pyautogui.press("nexttrack")
-            print("right")
-            right_tmp = True
-        if angle_head > -0.15:
-            right_tmp = False
+        #print(angle_head)
 
-        if angle_head > 0.15 and not left_tmp:
-            pyautogui.press("prevtrack")
-            print("left")
-            left_tmp = True
-        if angle_head < 0.15:
-            left_tmp = False
+    if angle_head < 0 and not top_temp:
+        print("top")
+        y_factor = int(angle_head * frame_h)
+        pyautogui.scroll(y_factor)
+        top_temp = True
+    if angle_head > 0:
+        top_temp = False
 
-        #clicking functionality
-        left = [landmarks[145], landmarks[159]]
-        for landmark in left:
-            #getting coordinates
-            x = int(landmark.x * frame_w)
-            y = int(landmark.y * frame_h)
-            cv2.circle(frame, (x, y), 3, (0, 255, 255))
+    if angle_head > 0 and not bottom_temp:
+        print("bottom")
+        y_factor = int(angle_head * frame_h *-1)
+        pyautogui.scroll(y_factor)
+        bottom_temp = True
+    if angle_head < 0:
+        bottom_temp = False
 
-        if(left[0].y - left[1].y) < 0.004:
-            print('click')
+        # if angle_head < -0.15 and not right_tmp:
+        #     pyautogui.press("nexttrack")
+        #     print("right")
+        #     right_tmp = True
+        # if angle_head > -0.15:
+        #     right_tmp = False
+
+        # if angle_head > 0.15 and not left_tmp:
+        #     pyautogui.press("prevtrack")
+        #     print("left")
+        #     left_tmp = True
+        # if angle_head < 0.15:
+        #     left_tmp = False
+
+        # #clicking functionality
+        # left = [landmarks[145], landmarks[159]]
+        # for landmark in left:
+        #     #getting coordinates
+        #     x = int(landmark.x * frame_w)
+        #     y = int(landmark.y * frame_h)
+        #     cv2.circle(frame, (x, y), 3, (0, 255, 255))
+
+        # if(left[0].y - left[1].y) < 0.004:
+        #     print('click')
 
 
     cv2.imshow('Eye Controlled Mouse', frame)

@@ -1,2 +1,2 @@
-if id == 1:
-                pyautogui.move(x, y)
+ # if 0.1 < angle_head < 0.01 and not top_temp:
+    #     print("top")
