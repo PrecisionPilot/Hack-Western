@@ -40,11 +40,6 @@ while True:
                 #pyautogui.moveTo(x, y)
                 pyautogui.moveTo(screen_x, screen_y)
 
-        # Calculate head angle
-        delta_x = landmarks[10].x - landmarks[152].x
-        delta_y = landmarks[10].y - landmarks[152].y
-        angle_head = math.atan(delta_x/delta_y)
-
         if angle_head < -0.15 and not right_tmp:
             pyautogui.press("nexttrack")
             print("right")
