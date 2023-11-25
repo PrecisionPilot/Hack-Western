@@ -24,6 +24,7 @@ with wave.open("speech.wav", "wb") as sound_file:
     sound_file.setframerate(44100)
     sound_file.writeframes(b''.join(frames))
 
+print("Analysing speech...")
 
 
 # -------------------- File to speech recognition --------------------
@@ -43,5 +44,8 @@ config = speech.RecognitionConfig(
     )
 response = client.recognize(config=config, audio=audio_file)
 
-# print(response.results[0].alternatives[0].transcript)
-print(response)
+if len(response.results) >= 1:
+    for result in response.results:
+        print(result.alternatives[0].transcript)
+else:
+    print("No speech detected")
