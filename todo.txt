@@ -1,0 +1,4 @@
+- Eye tracking?
+- Head gesture
+  - Switching music
+  - text to speech
