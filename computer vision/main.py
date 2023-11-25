@@ -43,12 +43,14 @@ while True:
         angle_head = math.atan(delta_x/delta_y)
 
         if angle_head < -0.15 and not right_tmp:
+            pyautogui.press("nexttrack")
             print("right")
             right_tmp = True
         if angle_head > -0.15:
             right_tmp = False
 
         if angle_head > 0.15 and not left_tmp:
+            pyautogui.press("prevtrack")
             print("left")
             left_tmp = True
         if angle_head < 0.15:
