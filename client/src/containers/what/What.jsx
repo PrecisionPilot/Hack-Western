@@ -14,7 +14,7 @@ const What = () => {
     <div className="web__whatweb-container">
       <Feature title="Scroll" text="Effortlessly scroll through content by looking at that that section of the webpage and blinking to click." />
       <Feature title="Type" text="Automate tasks like doing a Google search and essay writing with just your voice, no keys at all." />
-      <Feature title="Relax" text="At fixed time intervals, Gazy reminds your eyes to take a break from the screen, giving you the mental clarity you need." />
+      <Feature title="Speak" text="Simply express your desired text using Gazy's speech-to-text software, and we'll seamlessly input it into your browser." />
     </div>
   </div>
   )
