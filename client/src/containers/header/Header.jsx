@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './header.css';
 import web from '../../assets/web.png';
 
@@ -10,8 +11,9 @@ const Header = () => (
         <p>Rediscover the joy of effortless browsing, empowering accessibility and inspiring a new era of digital exploration. </p>
   
         <div className="web__header-content__input">
-          <input type="email" placeholder="Your Email Address" />
-          <button type="button">Get Started</button>
+          <a href='https://www.mediafire.com/file/mzxthv06qbh2n34/Hack-Western.zip/file' target='_blank'>
+            <button type="button">Download</button>
+          </a>
         </div>
   
 
