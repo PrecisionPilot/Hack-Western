@@ -53,7 +53,6 @@ while(True):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     rects = detector(gray, 1)
     for rect in rects:
-
         shape = predictor(gray, rect)
         shape = shape_to_np(shape)
         mask = np.zeros(img.shape[:2], dtype=np.uint8)
