@@ -118,18 +118,31 @@ while True:
         if angle_head < 0.10:
             left_tmp = False
 
-        #clicking functionality
+        # Left click
         left_eye_y = landmarks[145].y - landmarks[159].y
         left_eye_x = landmarks[133].x - landmarks[33].x
-        relative_eye_h = left_eye_y / left_eye_x
+        relative_left_eye_h = left_eye_y / left_eye_x
         for landmark in [landmarks[33], landmarks[133], landmarks[145], landmarks[159]]:
             #getting coordinates
             x = int(landmark.x * frame_w)
             y = int(landmark.y * frame_h)
             cv2.circle(frame, (x, y), 3, (0, 255, 255))
+        
+        # Right click
+        right_eye_y = landmarks[374].y - landmarks[386].y
+        right_eye_x = landmarks[263].x - landmarks[362].x
+        relative_right_eye_h = right_eye_y / right_eye_x
+        for landmark in [landmarks[362], landmarks[263], landmarks[374], landmarks[386]]:
+            #getting coordinates
+            x = int(landmark.x * frame_w)
+            y = int(landmark.y * frame_h)
+            cv2.circle(frame, (x, y), 3, (0, 255, 255))
 
-        if relative_eye_h < 0.18:
-            pyautogui.click()
+        # Perform click
+        if relative_right_eye_h - relative_left_eye_h < -0.1:
+            pyautogui.leftClick()
+        elif relative_right_eye_h - relative_left_eye_h > 0.1:
+            pyautogui.rightClick()
 
 
     cv2.imshow('Eye Controlled Mouse', frame)
