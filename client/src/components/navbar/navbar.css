@@ -43,7 +43,7 @@
     line-height: 25px;
     text-transform: capitalize;
 
-    margin: 0 2rem;
+    margin: 0 1.5rem;
     cursor: pointer;
 }
 
@@ -81,7 +81,7 @@
     
     text-align: end;
     background: var(--color-footer);
-    padding: 2rem;
+    padding: 1.5rem;
     position: absolute;
     right: 0;
     top: 40px;
@@ -117,7 +117,7 @@
 
 @media screen and (max-width: 550px) {
     .web__navbar {
-        padding: 2rem;
+        padding: 2 rem;
     }
 
     .web__navbar-sign {

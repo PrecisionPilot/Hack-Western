@@ -15,6 +15,7 @@ const Navbar = () => {
           <div className="web__navbar-links_container">
             <p><a href="#home">Home</a></p>
             <p><a href="#wweb">Features</a></p>
+            <p><a href="#possibility">Possibilities</a></p>
           </div>
         </div>
         <div className="web__navbar-sign">
@@ -30,6 +31,7 @@ const Navbar = () => {
             <div className="web__navbar-menu_container-links">
                 <p><a href="#home">Home</a></p>
                 <p><a href="#wweb">Features</a></p>
+                <p><a href="#possibility">Possibilities</a></p>
             </div>
             <div className="web__navbar-menu_container-links-sign">
               <p>Sign in</p>
