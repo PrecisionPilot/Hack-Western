@@ -2,6 +2,7 @@ import cv2
 import mediapipe as mp
 import pyautogui
 import math
+import speech_to_text
 
 cam = cv2.VideoCapture(0)
 face_mesh = mp.solutions.face_mesh.FaceMesh(refine_landmarks=True)
@@ -46,17 +47,20 @@ while True:
         angle_head = math.atan(delta_x/delta_y)
 
         if angle_head < -0.15 and not right_tmp:
-            pyautogui.press("nexttrack")
+            speech_to_text.Start()
+            # pyautogui.press("nexttrack")
             print("right")
             right_tmp = True
-        if angle_head > -0.15:
+        if angle_head > -0.10:
             right_tmp = False
 
         if angle_head > 0.15 and not left_tmp:
-            pyautogui.press("prevtrack")
+            speech_to_text.Stop()
+            # pyautogui.press("prevtrack")
+            speech_to_text.SpeechToText()
             print("left")
             left_tmp = True
-        if angle_head < 0.15:
+        if angle_head < 0.10:
             left_tmp = False
 
         #clicking functionality
