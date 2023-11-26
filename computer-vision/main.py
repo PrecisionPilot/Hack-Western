@@ -93,15 +93,14 @@ while True:
         if time.time() - recording_timer > 2 and is_recording:
             print("Recording stopped")
             speech_to_text.Stop()
-            speech_to_text.SpeechToText()
+            pyautogui.typewrite(speech_to_text.SpeechToText())
             is_recording = False
-
 
         #moving right
         if angle_head < -0.15 and not right_tmp:
             # speech_to_text.Start()
             print("right")
-            x_factor = int(frame_w  * 5)
+            x_factor = -int(frame_w  * 5)
             pyautogui.scroll(x_factor)
             pyautogui.sleep(0.5)
             right_tmp = True
@@ -113,7 +112,7 @@ while True:
             # speech_to_text.Stop()
             # speech_to_text.SpeechToText()
             print("left")
-            x_factor = -int(frame_w  * 5)
+            x_factor = int(frame_w  * 5)
             pyautogui.scroll(x_factor)
             pyautogui.sleep(0.5)
             left_tmp = True
@@ -124,14 +123,13 @@ while True:
         left_eye_y = landmarks[145].y - landmarks[159].y
         left_eye_x = landmarks[133].x - landmarks[33].x
         relative_eye_h = left_eye_y / left_eye_x
-        print(relative_eye_h)
         for landmark in [landmarks[33], landmarks[133], landmarks[145], landmarks[159]]:
             #getting coordinates
             x = int(landmark.x * frame_w)
             y = int(landmark.y * frame_h)
             cv2.circle(frame, (x, y), 3, (0, 255, 255))
 
-        if relative_eye_h < 0.15:
+        if relative_eye_h < 0.18:
             pyautogui.click()
 
 

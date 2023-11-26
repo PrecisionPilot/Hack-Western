@@ -73,6 +73,7 @@ def SpeechToText():
             return result.alternatives[0].transcript
     else:
         print("No speech detected")
+        return ""
 
 if __name__ == "__main__":
     Start()
