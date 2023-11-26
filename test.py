@@ -1,3 +1,3 @@
-import pyautogui
+from playsound import playsound
 
-pyautogui.typewrite("Hello world!")
+playsound("speech1.mp3")

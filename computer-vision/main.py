@@ -4,6 +4,7 @@ import pyautogui
 import math
 import speech_to_text
 import time
+from playsound import playsound
 
 cam = cv2.VideoCapture(0)
 face_mesh = mp.solutions.face_mesh.FaceMesh(refine_landmarks=True)
@@ -85,13 +86,13 @@ while True:
         #     bottom_temp = False
 
         if relative_mouth_lenh > 0.8 and not is_recording:
-            print("Recording started")
+            playsound("sound 1.mp3")
             speech_to_text.Start()
             is_recording = True
         if relative_mouth_lenh > 0.7:
             recording_timer = time.time()
         if time.time() - recording_timer > 2 and is_recording:
-            print("Recording stopped")
+            playsound("sound 2.mp3")
             speech_to_text.Stop()
             pyautogui.typewrite(speech_to_text.SpeechToText())
             is_recording = False
@@ -100,8 +101,7 @@ while True:
         if angle_head < -0.15 and not right_tmp:
             # speech_to_text.Start()
             print("right")
-            x_factor = -int(frame_w  * 5)
-            pyautogui.scroll(x_factor)
+            pyautogui.scroll(-400)
             pyautogui.sleep(0.5)
             right_tmp = True
         if angle_head > -0.10:
@@ -112,8 +112,7 @@ while True:
             # speech_to_text.Stop()
             # speech_to_text.SpeechToText()
             print("left")
-            x_factor = int(frame_w  * 5)
-            pyautogui.scroll(x_factor)
+            pyautogui.scroll(400)
             pyautogui.sleep(0.5)
             left_tmp = True
         if angle_head < 0.10:
