@@ -4,3 +4,4 @@ wave
 mediapipe
 opencv-python
 pyautogui
+playsound==1.2.2
