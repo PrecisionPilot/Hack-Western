@@ -61,6 +61,33 @@ while True:
         delta_y = landmarks[10].y - landmarks[152].y
         angle_head = math.atan(delta_x/delta_y)
 
+        #print(angle_head)
+
+        #moving up
+        if angle_head < 0 and not top_temp:
+            print("top")
+            y_factor = int(angle_head * frame_h * 10)
+            pyautogui.scroll(y_factor)
+            pyautogui.sleep(0.5)
+            top_temp = True
+        if angle_head > 0:
+            top_temp = False
+
+        #moving down
+        if angle_head > 0 and not bottom_temp:
+            print("bottom")
+            y_factor = int(angle_head * frame_h * -10)
+            pyautogui.scroll(y_factor)
+            pyautogui.sleep(0.5)
+            bottom_temp = True
+        if angle_head < 0:
+            bottom_temp = False
+
+        #moving right
+        if angle_head < -0.15 and not right_tmp:
+            print("right")
+            x_factor = int(angle_head * frame_w  * 10)
+            pyautogui.hscroll(x_factor)
         # Calculate mouth y length
         mouth_lenh = landmarks[17].y - landmarks[0].y
         mouth_lenw = landmarks[291].x - landmarks[61].x
