@@ -18,6 +18,10 @@ bottom_temp = False
 is_recording = False
 recording_timer = 0
 
+# Calculate distance between two points
+def distance(x1, y1, x2, y2):
+    return math.sqrt(abs(x1-x2)**2 + abs(y1-y2)**2)
+
 #activating the camera
 while True:
     _, frame = cam.read()
@@ -85,7 +89,7 @@ while True:
         # if angle_head < 0:
         #     bottom_temp = False
 
-        if relative_mouth_lenh > 0.8 and not is_recording:
+        if relative_mouth_lenh > 1 and not is_recording:
             playsound("sound 1.mp3")
             speech_to_text.Start()
             is_recording = True
@@ -119,8 +123,8 @@ while True:
             left_tmp = False
 
         # Left click
-        left_eye_y = landmarks[145].y - landmarks[159].y
-        left_eye_x = landmarks[133].x - landmarks[33].x
+        left_eye_y = distance(landmarks[145].x, landmarks[145].y, landmarks[159].x, landmarks[159].y)
+        left_eye_x = distance(landmarks[133].x, landmarks[133].y, landmarks[33].x, landmarks[33].y)
         relative_left_eye_h = left_eye_y / left_eye_x
         for landmark in [landmarks[33], landmarks[133], landmarks[145], landmarks[159]]:
             #getting coordinates
@@ -129,8 +133,8 @@ while True:
             cv2.circle(frame, (x, y), 3, (0, 255, 255))
         
         # Right click
-        right_eye_y = landmarks[374].y - landmarks[386].y
-        right_eye_x = landmarks[263].x - landmarks[362].x
+        right_eye_y = distance(landmarks[374].x, landmarks[374].y, landmarks[386].x, landmarks[386].y)
+        right_eye_x = distance(landmarks[263].x, landmarks[263].y, landmarks[362].x, landmarks[362].y)
         relative_right_eye_h = right_eye_y / right_eye_x
         for landmark in [landmarks[362], landmarks[263], landmarks[374], landmarks[386]]:
             #getting coordinates
@@ -139,10 +143,13 @@ while True:
             cv2.circle(frame, (x, y), 3, (0, 255, 255))
 
         # Perform click
-        if relative_right_eye_h - relative_left_eye_h < -0.1:
+        print(relative_right_eye_h - relative_left_eye_h)
+        if relative_right_eye_h - relative_left_eye_h < -0.15:
             pyautogui.leftClick()
-        elif relative_right_eye_h - relative_left_eye_h > 0.1:
+            pyautogui.sleep(0.5)
+        elif relative_right_eye_h - relative_left_eye_h > 0.12:
             pyautogui.rightClick()
+            pyautogui.sleep(0.5)
 
 
     cv2.imshow('Eye Controlled Mouse', frame)
